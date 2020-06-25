@@ -1,155 +1,36 @@
 # Augabenstellung
-Erstellung eines Bash-Skriptes zu bereinigung der Datei 2020-05-23-Article_list_dirty.tsv
+Erstellung eines Bash-Skriptes zu bereinigung der Datei 2020-05-23-Article_list_dirty.tsv. Es wird davon ausgegangen das sich die Ursprunsdatei auf dem Desktop befindet.
 
 # Erster Befehl
 Die oben gennante Datei befinden sich im Ordner Desktop, daher wird als erster Schritt in das verzeichnet gewechselt:
-
-
+cd ~/Desktop
 
 # Zweiter Befehl
 Überflüssige Zeilen löschen
-less 2020-05-23-Article_list_dirty.tsv | cut -f 5,12 > 2020-05-23-Article_list_dirty2.tsv 
-ISSN	Date
-ISSN: 0004-9522	1995
-0013-8266	1995
-0262-7280	1995
-0022-4529	1995
-0022-4529	1995
-	
-	
-	
-	
-0022-1953	1996
-1056-8190	1995
-0030-8684	1995
-0129-797X	1995
-0018-2648	1996
-ISSN:0265-6914	1996
-0265-6914	1996
-ISSN:0008-4107	1995
-	
-	
-	
-	
-0950-9224	1995
-0707-5332	1995
-0019-7211	1996
-0022-2801	1995
-0022-2801	1995
-0018-2613	1996
-0968-7475	1995
-0003-813X	1996
-0013-2683	1995
-6	eng
-6	eng
-27	eng
-39	eng
-29	eng
-29	eng
-29	eng
-44	eng
-0022-2801	1996
-0022-2801	1996
-0707-5332	1996
-issn: 0707-5332	1996
-0707-5332	1996
-0707-5332	1996
-0707-5332	1996
-Issn:  0029-3652	1995
-0305-8034	1996
-0022-5037	1996
-0315-7997	1996
-0095-1390	1995
-0095-1390	1995
-0095-1390	1995
-0095-1390	1995
-0095-1390	1995
-0009-4455	1995
-0018-2753	1996
-0022-2801	1996
-0022-2801	1996
-0008-4107	1996
-0079-4848	1996
-0095-1390	1995
-0095-1390	1995
-0095-1390	1995
-0023-656X	1996
-0265-7325	1996
-0018-2753	1996
-0018-2753	1996
-0022-4634	1996
-0037-6795	1996
-0021-8537	1996
-0095-1390	1996
-0095-1390	1996
-0095-1390	1996
-	
-	
-	
-0010-4175	1996
-0142-7962	1996
-0143-781X	1996
-0020-8590	1996
-1361-2343	1994
-1331-3134	1994
-0018-246X	1996
-0048-8003	1995
-0011-3212	1996
-0013-8266	1996
-0013-8266	1996
-0013-8266	1996
-0022-4529	1996
-0022-0094	1996
-0022-0094	1996
-0707-5332	1996
-0707-5332	1996
-0707-5332	1996
-1078-6279	1996
-1078-6279	1996
-0022-2801	1996
-0022-2801	1996
-0313-6221	1996
-0018-2613	1996
-1069-5834	1996
-0018-2648	1996
-0095-1390	1996
-0095-1390	1996
-0095-1390	1996
-0095-1390	1996
-0095-1390	1996
-0013-8266	1996
-0021-9118	1996
-0003-598X	1996
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-0022-4529	1996
-0018-246X	1996
-0012-8449	1996
-0018-2613	1996
-0707-5332	1996
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-1361-9462	1994
-0037-6779	1996
-1350-7486	1996
-0968-7475	1996
-
+less 2020-05-23-Article_list_dirty.tsv | cut -f 5,12 > 2020-05-23-Article_list_dirtyTEMP2.tsv 
 
 # Dritter Befehl
 Entfernt alle Zeichen die ein "eng" enthalten
-$ grep -v eng 2020-05-23-Article_list_dirty2.tsv >  2020-05-23-Article_list_dirty3.tsv 
+grep -v eng 2020-05-23-Article_list_dirtyTEMP2.tsv >  2020-05-23-Article_list_dirtyTEMP3.tsv 
 
 # vierter Befehl
-Entfernt alle Zeichen die "issn" enthalten, Groß- Kleinschreibung ist dabei nicht relavant
+Entfernt alle Zeichen die "issn" enthalten, Groß- Kleinschreibung ist dabei nicht relavant. Ebenfalls werden alle ":" entfernt so wie überflüssigen Leerzeichen am Anfang der Zeilen.
+sed 's/issn//ig;s/:/ /g;s/^[ \t]*//;s/date//ig' 2020-05-23-Article_list_dirtyTEMP3.tsv > 2020-05-23-Article_list_dirtyTEMP4.tsv 
 
 # fünfter Befehl
+Da noch reduntante Zeilen vorhanden sind, werden diese mit folgendem Befehl entfernt:
+sort -u 2020-05-23-Article_list_dirtyTEMP4.tsv >2020-05-23-Article_list_dirty.tsv 
+Dies entfernt ebenfalls unötige leere Zeilen.
+
+# Sechsters Befehl
+Die Zwischen gepeicherten Dateien müssen im anschluss gelöscht werden:
+rm 2020-05-23-Article_list_dirtyT*
 
 
+# Fertiges Script
+cd ~/Desktop
+less 2020-05-23-Article_list_dirty.tsv | cut -f 5,12 > 2020-05-23-Article_list_dirtyTEMP2.tsv
+grep -v eng 2020-05-23-Article_list_dirtyTEMP2.tsv >  2020-05-23-Article_list_dirtyTEMP3.tsv 
+sed 's/issn//ig;s/:/ /g;s/^[ \t]*//;s/date//ig' 2020-05-23-Article_list_dirtyTEMP3.tsv > 2020-05-23-Article_list_dirtyTEMP4.tsv
+sort -u 2020-05-23-Article_list_dirtyTEMP4.tsv >2020-05-23-Article_list_dirty.tsv
+rm 2020-05-23-Article_list_dirtyT*
