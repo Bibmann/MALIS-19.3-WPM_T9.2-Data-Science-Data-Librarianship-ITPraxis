@@ -34,8 +34,13 @@ rm 2020-05-23-Article_list_dirtyT*
 
 # Fertiges Script
 cd ~/Desktop
+
 less 2020-05-23-Article_list_dirty.tsv | cut -f 5,12 > 2020-05-23-Article_list_dirtyTEMP2.tsv
+
 grep -v eng 2020-05-23-Article_list_dirtyTEMP2.tsv >  2020-05-23-Article_list_dirtyTEMP3.tsv 
+
 sed 's/issn//ig;s/:/ /g;s/^[ \t]*//;s/date//ig' 2020-05-23-Article_list_dirtyTEMP3.tsv > 2020-05-23-Article_list_dirtyTEMP4.tsv
+
 sort -u 2020-05-23-Article_list_dirtyTEMP4.tsv >2020-05-23-Article_list_dirty.tsv
+
 rm 2020-05-23-Article_list_dirtyT*
