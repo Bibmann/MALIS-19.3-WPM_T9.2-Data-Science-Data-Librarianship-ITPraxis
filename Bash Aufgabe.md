@@ -2,7 +2,7 @@
 Erstellung eines Bash-Skriptes zu bereinigung der Datei 2020-05-23-Article_list_dirty.tsv. Es wird davon ausgegangen das sich die Ursprunsdatei auf dem Desktop befindet.
 
 # Erster Befehl
-Die oben gennante Datei befinden sich im Ordner Desktop, daher wird als erster Schritt in das verzeichnet gewechselt:
+Die oben gennante Datei befinden sich im Ordner Desktop, daher wird als erster Schritt in das Verzeichnis gewechselt:
 cd ~/Desktop
 
 # Zweiter Befehl
