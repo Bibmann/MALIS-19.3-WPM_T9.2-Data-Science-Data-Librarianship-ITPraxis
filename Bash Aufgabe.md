@@ -27,7 +27,7 @@ sort -u 2020-05-23-Article_list_dirtyTEMP4.tsv >2020-05-23-Article_list_dirty.ts
 Dies entfernt ebenfalls unötige leere Zeilen.
 
 # Sechsters Befehl
-Die Zwischen gepeicherten Dateien müssen im anschluss gelöscht werden:
+Die zwischengespeicherten Dateien müssen im Anschluss gelöscht werden:
 
 rm 2020-05-23-Article_list_dirtyT*
 
